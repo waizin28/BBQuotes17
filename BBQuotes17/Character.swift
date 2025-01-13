@@ -15,5 +15,5 @@ struct Character: Decodable{
     let aliases: [String]
     let status: String
     let portrayedBy: String
-    let death: Death? // not all character will have death data
+    var death: Death? // not all character will have death data (this is var because optional automatically set its value to nil)
 }
