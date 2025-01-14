@@ -28,7 +28,7 @@ class ViewModel{ // class need inital value if we declare property
     
     // store data
     var quote: Quote
-    var chracter: Character
+    var chracter: Char
     
     // run as soon as we initilize this class
     init(){
