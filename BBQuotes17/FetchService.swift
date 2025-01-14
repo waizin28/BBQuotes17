@@ -8,11 +8,11 @@
 import Foundation
 
 struct FetchService{
-    enum FetchError: Error {
+    private enum FetchError: Error {
         case badResponse
     }
     
-    let baseUrl = URL(string: "https://breaking-bad-api-six.vercel.app/api")! //convert string to URL, ! to force passed in value to convert as URL
+    private let baseUrl = URL(string: "https://breaking-bad-api-six.vercel.app/api")! //convert string to URL, ! to force passed in value to convert as URL
     
     // https://breaking-bad-api-six.vercel.app/api/quotes/random?production=Breaking+Bad
     // Get random quote from a specific show
