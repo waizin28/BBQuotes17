@@ -28,7 +28,7 @@ class ViewModel{ // class need inital value if we declare property
     
     // store data
     var quote: Quote
-    var chracter: Char
+    var character: Char
     
     // run as soon as we initilize this class
     init(){
@@ -39,6 +39,18 @@ class ViewModel{ // class need inital value if we declare property
         quote = try! decoder.decode(Quote.self, from: quoteData)
         
         let characterData = try! Data(contentsOf: Bundle.main.url(forResource: "samplecharacter", withExtension: "json")!) //need ! because we don't have do catch here
-        chracter = try! decoder.decode(Char.self, from: characterData)
+        character = try! decoder.decode(Char.self, from: characterData)
+    }
+    
+    func getData(for show: String) async {
+        status = .fetching
+        do{
+            quote = try await fetcher.fetchQuote(from: show)
+            character = try await fetcher.fetchCharacter(quote.character)
+            character.death = try await fetcher.fetchDeath(for: character.name) //nil or some data
+            status = .success
+        }catch{
+            status = .failed(error: error)
+        }
     }
 }
