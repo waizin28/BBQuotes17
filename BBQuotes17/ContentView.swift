@@ -10,17 +10,15 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView{
-            Text("Breaking Bad View")
-                .toolbarBackground(.visible, for: .tabBar) // to make tab differentator appear
-                .tabItem{
-                    Label("Breaking Bad", systemImage: "tortoise")
-                }
+            Tab("Breaking Bad", systemImage: "tortoise"){
+                QuoteView(show: "Breaking Bad")
+                    .toolbarBackgroundVisibility(.visible, for: .tabBar) // to make tab differentator appear
+            }
             
-            Text("Better Call Saul View")
-                .toolbarBackground(.visible, for: .tabBar) // to make tab differentator appear
-                .tabItem{
-                    Label("Better Call Saul", systemImage: "briefcase")
-                }
+            Tab("Better Call Saul", systemImage: "briefcase"){
+                QuoteView(show: "Better Call Saul")
+                    .toolbarBackgroundVisibility(.visible, for: .tabBar) // to make tab differentator appear
+            }
         }
         .preferredColorScheme(.dark)
     }
