@@ -32,6 +32,13 @@ class ViewModel{ // class need inital value if we declare property
     
     // run as soon as we initilize this class
     init(){
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase // convert snake case at json data to camel case
         
+        let quoteData = try! Data(contentsOf: Bundle.main.url(forResource: "samplequote", withExtension: "json")!) //need ! because we don't have do catch here
+        quote = try! decoder.decode(Quote.self, from: quoteData)
+        
+        let characterData = try! Data(contentsOf: Bundle.main.url(forResource: "samplecharacter", withExtension: "json")!) //need ! because we don't have do catch here
+        chracter = try! decoder.decode(Char.self, from: characterData)
     }
 }
