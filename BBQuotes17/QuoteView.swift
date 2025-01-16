@@ -21,6 +21,9 @@ struct QuoteView: View {
                     .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
                 
                 VStack{
+                    
+                    Spacer()
+                    
                     // Actual Quote itself by character
                     Text("\"\(viewModel.quote.quote)\"") //first .quote is quote type and second .quote is property
                         .multilineTextAlignment(.center)
@@ -53,9 +56,12 @@ struct QuoteView: View {
                     .frame(width: geo.size.width/1.1, height: geo.size.height/1.8)
                     .clipShape(.rect(cornerRadius: 50))
                     
+                    Spacer()
+                    
                     Button{
                         
-                    }label: {
+                    }label: { // why we do label is because we want the whole area to be considered as button
+                        // to be part of button
                         Text("Get Random Quote")
                         .font(.title)
                         .foregroundStyle(.white)
@@ -64,8 +70,10 @@ struct QuoteView: View {
                         .clipShape(.rect(cornerRadius: 7))
                         .shadow(color: .breakingBadYellow, radius: 5)
                     }
+                    
+                    Spacer(minLength: 95) // space need to take at least this much space, the reason we edit is to have some space up for navigation bar
                         
-                }.frame(width: geo.size.width) // to restrict vstack width to be just screen size width otherwise will stretch out due to image size
+                }.frame(width: geo.size.width, height: geo.size.height) // to restrict vstack width to be just screen size width because image stretched it out
             }
             .frame(width: geo.size.width, height: geo.size.height) //workaround to center geometry reader
         }
