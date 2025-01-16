@@ -21,43 +21,52 @@ struct QuoteView: View {
                     .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
                 
                 VStack{
-                    
-                    Spacer(minLength: 60)
-                    
-                    // Actual Quote itself by character
-                    Text("\"\(viewModel.quote.quote)\"") //first .quote is quote type and second .quote is property
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(.white)
-                        .padding()
-                        .background(.black.opacity(0.5))
-                        .clipShape(.rect(cornerRadius: 25))
-                        .padding(.horizontal)
-                        .minimumScaleFactor(0.5)
-                    
-                    // Character Image + Name Stack
-                    ZStack(alignment: .bottom){
-                        
-                        // Character Image
-                        AsyncImage(url: viewModel.character.images[0]){ image in
-                            image
-                                .resizable()
-                                .scaledToFill()
-                        }placeholder: {
+                    VStack{ // This extra VStack to anchor button at bottom section as btn
+                        Spacer(minLength: 60)
+                        switch viewModel.status {
+                        case .notStarted:
+                            EmptyView()
+                        case .fetching:
                             ProgressView()
+                        case .success:
+                            // Actual Quote itself by character
+                            Text("\"\(viewModel.quote.quote)\"") //first .quote is quote type and second .quote is property
+                                .multilineTextAlignment(.center)
+                                .foregroundStyle(.white)
+                                .padding()
+                                .background(.black.opacity(0.5))
+                                .clipShape(.rect(cornerRadius: 25))
+                                .padding(.horizontal)
+                                .minimumScaleFactor(0.5)
+                            
+                            // Character Image + Name Stack
+                            ZStack(alignment: .bottom){
+                                
+                                // Character Image
+                                AsyncImage(url: viewModel.character.images[0]){ image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                }placeholder: {
+                                    ProgressView()
+                                }
+                                .frame(width: geo.size.width/1.1, height: geo.size.height/1.8) // Character Image is making Z Stack too tall, prohbiting from seeing character name
+                                
+                                // Character Name
+                                Text(viewModel.quote.character)
+                                    .foregroundStyle(.white)
+                                    .padding(10)
+                                    .frame(maxWidth: .infinity)
+                                    .background(.ultraThinMaterial)
+                            }
+                            .frame(width: geo.size.width/1.1, height: geo.size.height/1.8)
+                            .clipShape(.rect(cornerRadius: 50))
+                        case .failed(let error):
+                            Text(error.localizedDescription)
                         }
-                        .frame(width: geo.size.width/1.1, height: geo.size.height/1.8) // Character Image is making Z Stack too tall, prohbiting from seeing character name
                         
-                        // Character Name
-                        Text(viewModel.quote.character)
-                            .foregroundStyle(.white)
-                            .padding(10)
-                            .frame(maxWidth: .infinity)
-                            .background(.ultraThinMaterial)
+                        Spacer()
                     }
-                    .frame(width: geo.size.width/1.1, height: geo.size.height/1.8)
-                    .clipShape(.rect(cornerRadius: 50))
-                    
-                    Spacer()
                     
                     Button{
                         Task{ //asynchronous work that can be run in synchronous environement like swift UI view
