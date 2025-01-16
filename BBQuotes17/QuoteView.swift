@@ -60,7 +60,9 @@ struct QuoteView: View {
                     Spacer()
                     
                     Button{
-                        
+                        Task{ //asynchronous work that can be run in synchronous environement like swift UI view
+                            await viewModel.getData(for: show)
+                        }
                     }label: { // why we do label is because we want the whole area to be considered as button
                         // to be part of button
                         Text("Get Random Quote")
