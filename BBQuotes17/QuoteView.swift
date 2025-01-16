@@ -22,7 +22,7 @@ struct QuoteView: View {
                 
                 VStack{
                     
-                    Spacer()
+                    Spacer(minLength: 60)
                     
                     // Actual Quote itself by character
                     Text("\"\(viewModel.quote.quote)\"") //first .quote is quote type and second .quote is property
@@ -32,6 +32,7 @@ struct QuoteView: View {
                         .background(.black.opacity(0.5))
                         .clipShape(.rect(cornerRadius: 25))
                         .padding(.horizontal)
+                        .minimumScaleFactor(0.5)
                     
                     // Character Image + Name Stack
                     ZStack(alignment: .bottom){
