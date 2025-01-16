@@ -53,6 +53,17 @@ struct QuoteView: View {
                     .frame(width: geo.size.width/1.1, height: geo.size.height/1.8)
                     .clipShape(.rect(cornerRadius: 50))
                     
+                    Button{
+                        
+                    }label: {
+                        Text("Get Random Quote")
+                        .font(.title)
+                        .foregroundStyle(.white)
+                        .padding()
+                        .background(.breakingBadGreen)
+                        .clipShape(.rect(cornerRadius: 7))
+                        .shadow(color: .breakingBadYellow, radius: 5)
+                    }
                         
                 }.frame(width: geo.size.width) // to restrict vstack width to be just screen size width otherwise will stretch out due to image size
             }
