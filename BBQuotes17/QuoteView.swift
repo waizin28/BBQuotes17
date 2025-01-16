@@ -78,9 +78,9 @@ struct QuoteView: View {
                         .font(.title)
                         .foregroundStyle(.white)
                         .padding()
-                        .background(.breakingBadGreen)
+                        .background(Color("\(show.replacingOccurrences(of: " ", with: ""))Button"))
                         .clipShape(.rect(cornerRadius: 7))
-                        .shadow(color: .breakingBadYellow, radius: 5)
+                        .shadow(color: Color("\(show.replacingOccurrences(of: " ", with: ""))Shadow"), radius: 5)
                     }
                     
                     Spacer(minLength: 95) // space need to take at least this much space, the reason we edit is to have some space up for navigation bar
